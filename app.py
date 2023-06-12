@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 from matplotlib import dates
 import numpy as np
 import array
-import functools as ft # For merging multiple dataframes
 import altair as alt
 
 st.set_page_config(
@@ -142,21 +141,6 @@ films_count_of_five_highest_share = films_five_highest_share.groupby([films_five
 films_count_2011_now = films_count_of_five_highest_share.loc[films_count_of_five_highest_share['year'] > 2010].reset_index()
 films_count_2011_now = films_count_2011_now.drop(columns=['index'])
 films_count_2011_now["year"] = pd.to_datetime(films_count_2011_now["year"], format='%Y')
-
-dataframes = [films_count_2011_now, accumulation_gross_2011_now, films_list_2011_now, shares_of_five_biggest_avg]
-from functools import reduce
-analysis_needs = reduce(lambda  left,right: pd.merge(left,right,on=['year','distributor'],how='outer'), dataframes).fillna('none')
-analysis_needs = analysis_needs[['year','distributor','marketShare','films_count','film','total_gross','accumulation_gross']]
-
-dict = {"marketShare": "market_shares", 
-        "film": "best_film", 
-        "total_gross": "highest_gross_earns"}
-
-analysis_needs = analysis_needs.rename(columns=dict)
-analysis_needs['market_shares'] = analysis_needs['market_shares'].replace('none',np.NaN).astype('Int64')
-
-
-
 
 # Any Preparations
 five_averages_distributors_modif = pivot_distributors_columns.astype(str)
