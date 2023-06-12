@@ -2,6 +2,5 @@ pandas
 seaborn
 matplotlib
 numpy
-array
 functools
 altair
