@@ -582,6 +582,8 @@ if nav_button_7:
     st.markdown("""
         <p style='text-align: justify;'>Perjalanan dari kedua perusahaan tersebut (20th Century Fox dan The Walt Disney Company) dapat ditinjau dengan melihat perbandingan pergerakan jumlah film yang ditayangkan dan akumulasi perolehan pendapatan mentah. Sepuluh tahun sebelum memasuki pandemi COVID-19 (2020), <b>The Walt Disney Company memasarkan film dengan jumlah paling sedikit</b> dibandingkan dengan empat perusahaan lainnya (juga dengan posisi di bawah 20th Century Fox). Sedangkan 20th Century Fox menempati posisi yang lebih unggul dalam pemasaran film hingga penurunan terjadi dalam 2 tahun terakhir (2018-2019). Walaupun demikian, posisi The Walt Disney Company secara garis besar lebih mendominasi dalam akumulasi perolehan pendapatan mentah dibandingkan dengan perusahaan lainnya. Melalui perbandingan tersebut dapat diasumsikan bahwa film yang dipasarkan oleh The Walt Disney Company memiliki jumlah peminat film yang sangat banyak.</p>
     """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
 
     col7, col8 = st.columns(2)
 
