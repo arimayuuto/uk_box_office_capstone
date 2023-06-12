@@ -1,0 +1,8 @@
+pandas
+seaborn
+matplotlib.pyplot
+matplotlib
+numpy
+array
+functools
+altair
