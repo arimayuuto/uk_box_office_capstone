@@ -524,7 +524,7 @@ if nav_button_7:
             st.image('disney_logo.png', use_column_width=True, caption='Logo Disney')
 
         st.markdown("""
-            <p style='text-align: justify;'>20th Century Fox (sekarang adalah 20th Century Studio) dulunya adalah salah satu perusahaan distributor studio perfilman, sebelum akhirnya diakuisisi oleh The Walt Disney Studio untuk menjadi bagian dari anak perusahaannya. Akuisisi tersebut terjadi pada tahun 2019 yang lalu yang di mana The Walt Disney Studio (salah satu divisi dari The Walt Disney Company) itu sendiri membeli semua aset perusahaan branding Fox dan mengganti semua nama studio yang berelasi dengannya. Kejadian akuisisi tersebut dapat terlihat dari <b>pergerakan saham 20th Century Fox yang di mana tahun 2019 menjadi perhentian terakhirnya<b>.</p>
+            <p style='text-align: justify;'>20th Century Fox (sekarang adalah 20th Century Studio) dulunya adalah salah satu perusahaan distributor studio perfilman, sebelum akhirnya diakuisisi oleh The Walt Disney Studio untuk menjadi bagian dari anak perusahaannya. Akuisisi tersebut terjadi pada tahun 2019 yang lalu yang di mana The Walt Disney Studio (salah satu divisi dari The Walt Disney Company) itu sendiri membeli sebagian besar aset perusahaan branding Fox dan mengganti semua nama studio yang berelasi dengannya. Kejadian akuisisi tersebut dapat terlihat dari <b>pergerakan saham 20th Century Fox yang di mana tahun 2019 menjadi perhentian terakhirnya<b>. Walaupun demikian, aset fox yang masih tersisa hingga saat ini adalah Fox Corp yang merupakan tayangan berita dan olahraga, dengan jaringan Fox Sports, Fox News, dan Fox TV.</p>
         """, unsafe_allow_html=True)
 
     with col2:
