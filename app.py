@@ -507,7 +507,7 @@ if nav_button_6:
             st.altair_chart(total_earns_line,use_container_width=True)
 
 if nav_button_7:
-    st.title("Penurunan Jumlah Pemasaran Film Baru 20th Century Fox")
+    st.title("Kemunduran 20th Century Fox dari Dunia Bioskop")
     st.write("**Oleh : Christopher Chandra, S. Kom. (12 Juni 2023)**")
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -617,7 +617,7 @@ if nav_button_7:
         """, unsafe_allow_html=True)
 
         st.markdown("""
-            <p style='text-align: justify;'>Pemasaran / penayangan yang terdaftar dalam Box Office inggris adalah tidak hanya film baru saja, juga terdapat penayangan kembali film yang sudah ditayangkan sebelumnya. Melalui chart di samping sudah terbukti bahwa mulai dari awal pandemi hingga saat ini, 20th Century Fox sendiri lah yang memiliki angka jumlah penayangan kembali dibandingkan dengan jumlah penayangan film baru.</p>
+            <p style='text-align: justify;'>Pemasaran / penayangan yang terdaftar dalam Box Office inggris adalah tidak hanya film baru saja, juga terdapat penayangan kembali film yang sudah ditayangkan sebelumnya. Melalui chart di samping didapatkan bahwa mulai dari awal pandemi hingga saat ini, hanya 20th Century Fox sendiri lah yang memiliki angka jumlah penayangan kembali lebih besar dibandingkan dengan jumlah penayangan film baru.</p>
         """, unsafe_allow_html=True)
 
 if nav_button_8:
