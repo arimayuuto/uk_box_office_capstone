@@ -156,7 +156,7 @@ year_shares = sorted(market_shares.year.dt.year.unique())
 year_shares = pd.to_datetime(year_shares, format='%Y')
 
 # Sidebar Title
-st.sidebar.title("Arima Yuuto - UK Box Office 2011-2023")
+st.sidebar.title("Arima Yuuto - UK Box Office 2011-Now")
 
 # Tampilkan tombol navigasi pada sidebar
 nav_button_1 = st.sidebar.button("Overview")
