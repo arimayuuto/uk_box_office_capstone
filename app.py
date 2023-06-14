@@ -230,7 +230,7 @@ if nav_button_1:
     with col1:
         source = films_five_highest_share.groupby(films_five_highest_share.year).agg(total_gross=('total_gross', 'sum')).reset_index()
 
-        chart = alt.Chart(source).mark_line().encode(
+        chart = alt.Chart(source).mark_line(point=True).encode(
             alt.X('year', title='Year'),
             alt.Y('total_gross', title='Gross Earn')
         ).properties(
@@ -380,7 +380,7 @@ if nav_button_4:
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.subheader("Total Shares Movements")
-    total_shares = alt.Chart(market_shares_2011_now).mark_line().encode(
+    total_shares = alt.Chart(market_shares_2011_now).mark_line(point=True).encode(
     alt.X('year', title='Year'),
     alt.Y('marketShare', title='Total Share')
     ).properties(
@@ -411,7 +411,7 @@ if nav_button_4:
 
     for i in range(len(five_averages_distributors_modif)):
         with five_averages_distributors_modif[i]:
-            shares_line = alt.Chart(pivot_five_avg_biggest).mark_line().encode(
+            shares_line = alt.Chart(pivot_five_avg_biggest).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Market Share')
             )
@@ -441,7 +441,7 @@ if nav_button_5:
 
     for i in range(len(five_averages_distributors_modif)):
         with five_averages_distributors_modif[i]:
-            films_line = alt.Chart(pivot_count_films_of_five_2011_now).mark_line().encode(
+            films_line = alt.Chart(pivot_count_films_of_five_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Films Count')
             )
@@ -474,7 +474,7 @@ if nav_button_6:
 
     for i in range(len(five_averages_distributors_modif)):
         with five_averages_distributors_modif[i]:
-            highest_earns_line = alt.Chart(pivot_highest_gross_2011_now).mark_line().encode(
+            highest_earns_line = alt.Chart(pivot_highest_gross_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Highest Gross')
             )
@@ -500,7 +500,7 @@ if nav_button_6:
 
     for i in range(len(five_averages_distributors_modif)):
         with five_averages_distributors_modif[i]:
-            total_earns_line = alt.Chart(pivot_accumulation_gross_2011_now).mark_line().encode(
+            total_earns_line = alt.Chart(pivot_accumulation_gross_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Accumulation Gross')
             )
@@ -528,7 +528,7 @@ if nav_button_7:
         """, unsafe_allow_html=True)
 
     with col2:
-        shares_line = alt.Chart(pivot_five_avg_biggest).mark_line().encode(
+        shares_line = alt.Chart(pivot_five_avg_biggest).mark_line(point=True).encode(
             alt.X('year', title='Tahun'),
             alt.Y("20TH CENTURY FOX", title='Nilai Saham (£)')
         ).properties(
