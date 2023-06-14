@@ -11,9 +11,11 @@ import array
 import altair as alt
 
 st.set_page_config(
-    page_title = "Arima Yuuto UK Box Office", 
-    layout = "wide"
-    )
+    page_title="Arima Yuuto UK Box Office", 
+    layout="wide", 
+    initial_sidebar_state="auto", 
+    theme="light"
+)
 
 # Styling the page
 st.markdown(
