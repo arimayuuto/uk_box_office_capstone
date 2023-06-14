@@ -508,7 +508,7 @@ if nav_button_6:
 
 if nav_button_7:
     st.title("Kemunduran 20th Century Fox dari Dunia Bioskop")
-    st.write("**Oleh : Christopher Chandra, S. Kom. (12 Juni 2023)**")
+    st.write("**Oleh : Christopher Chandra (12 Juni 2023)**")
     st.markdown("<br>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
