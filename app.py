@@ -556,7 +556,7 @@ if nav_button_7:
         line_chart = alt.Chart(count_films_of_five_2011_now).mark_line(point=True).encode(
             alt.X('year', title='Tahun'),
             alt.Y('film_count', title='Jumlah Film'),
-            alt.Color('distributor', title='Distributor', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
+            alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
         ).properties(
             title='Jumlah Film Ditayangkan',
             height=500
@@ -570,7 +570,7 @@ if nav_button_7:
         line_chart = alt.Chart(accumulation_gross_2011_now).mark_line(point=True).encode(
             alt.X('year', title='Tahun'),
             alt.Y('accumulation_gross', title='Pendapatan Mentah (£)'),
-            alt.Color('distributor', title='Distributor', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
+            alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
         ).properties(
             title='Akumulasi Pendapatan Mentah',
             height=500
