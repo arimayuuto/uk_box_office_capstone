@@ -161,7 +161,7 @@ st.sidebar.title("Arima Yuuto - UK Box Office 2011-Now")
 # Tampilkan tombol navigasi pada sidebar
 nav_button_1 = st.sidebar.button("Overview")
 nav_button_2 = st.sidebar.button("Tables")
-nav_button_3 = st.sidebar.button("Distributors")
+nav_button_3 = st.sidebar.button("Studios")
 nav_button_4 = st.sidebar.button("Market Shares")
 nav_button_5 = st.sidebar.button("Films")
 nav_button_6 = st.sidebar.button("Gross Earns")
@@ -266,7 +266,7 @@ if nav_button_1:
 if nav_button_2:
     st.title("Tables")
 
-    shares, tab2 = st.tabs(["Shares", "Movies"])
+    shares, movies = st.tabs(["Shares", "Movies"])
 
     with shares:
 
@@ -280,16 +280,16 @@ if nav_button_2:
 
         for i in range(len(list_tabs)):
             with list_tabs[i]:
-                data = market_shares[['distributor', 'marketShare', 'marketPercentage']].loc[market_shares['year'] == year_datever_shares_picked[i]].reset_index().drop(columns=['index'])
+                data = market_shares[['distributor', 'marketShare']].loc[market_shares['year'] == year_datever_shares_picked[i]].reset_index().drop(columns=['index'])
                 data = data.assign(percentage=data['marketShare']/total_market_shares['marketShare'].iloc[-1-i])
-                data = data.rename(columns={'distributor': 'Distributor', 'marketShare': 'Market Share','percentage': 'Percentage'})
+                data = data.rename(columns={'distributor': 'Studio', 'marketShare': 'Market Share','percentage': 'Percentage'})
                 def format_percentage(value):
                     return '{:.2%}'.format(value)
                 data['Percentage'] = data['Percentage'].apply(format_percentage)
                 data = data.sort_values(by='Market Share', ascending=False).reset_index().drop(columns=['index'])
                 st.dataframe(data, use_container_width=True)
 
-    with tab2:
+    with movies:
 
         list_tabs = (["t_1","t_2","t_3","t_4","t_5","t_6","t_7","t_8","t_9","t_10","t_11","t_12","t_13"])
         list_year = year_shares[-1:-14:-1]
@@ -302,13 +302,13 @@ if nav_button_2:
         for i in range(len(list_tabs)):
             with list_tabs[i]:
                 data = film_showing_status[['film', 'distributor_x', 'status']].loc[film_showing_status['year'] == ((film_showing_status['year'].max())-i)].reset_index().drop(columns=['index'])
-                data = data.rename(columns={'film': 'Title', 'distributor_x': 'Distributor','year': 'Year', 'status': 'Status'})
+                data = data.rename(columns={'film': 'Title', 'distributor_x': 'Studio','year': 'Year', 'status': 'Status'})
                 data = data.sort_values(by='Title', ascending=True).reset_index().drop(columns=['index'])
                 st.dataframe(data, use_container_width=True)
 
 
 if nav_button_3:
-    st.title("Distributors")
+    st.title("Studios")
     
     five_averages_distributors_modif = st.tabs([five_averages_distributors[0], five_averages_distributors[1], five_averages_distributors[2], five_averages_distributors[3], five_averages_distributors[4]])
 
@@ -391,13 +391,13 @@ if nav_button_4:
     )
     st.altair_chart(total_shares,use_container_width=True)
 
-    st.subheader("Shares Movement of Five Distributor")
+    st.subheader("Shares Movement of Five Studio")
     # Five distributors in a chart
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(shares_of_five_biggest_avg).mark_line(point=True).encode(
         alt.X('year', title='Year'),
         alt.Y('marketShare', title='Market Shares'),
-        alt.Color('distributor', title='Distributor', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
+        alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Distributor Average Shares Movements',
         height=500
@@ -422,13 +422,13 @@ if nav_button_5:
     st.title("Films")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.subheader("Films Count of Five Distributor")
+    st.subheader("Films Count of Five Studios")
     # Five distributors in a chart
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(count_films_of_five_2011_now).mark_line(point=True).encode(
         alt.X('year', title='Year'),
         alt.Y('film_count', title='Film Count'),
-        alt.Color('distributor', title='Distributor', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
+        alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Films Count Movements',
         height=500
@@ -455,13 +455,13 @@ if nav_button_6:
     st.markdown("<br>", unsafe_allow_html=True)
     
     # Highest Gross
-    st.subheader("Highest Gross of Five Distributor")
+    st.subheader("Highest Gross of Five Studios")
     ## Five distributors in a chart
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(highest_gross_2011_now).mark_line(point=True).encode(
         alt.X('year', title='Year'),
         alt.Y('highest_gross', title='Highest Gross'),
-        alt.Color('distributor', title='Distributor', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
+        alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Distributor Average Shares Movements',
         height=500
@@ -481,13 +481,13 @@ if nav_button_6:
             st.altair_chart(highest_earns_line,use_container_width=True)
 
     # Accumulation Gross
-    st.subheader("Accumulation Gross of Five Distributor")
+    st.subheader("Accumulation Gross of Five Studios")
     ## Five distributors in a chart
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(accumulation_gross_2011_now).mark_line(point=True).encode(
         alt.X('year', title='Year'),
         alt.Y('accumulation_gross', title='Accumulation Gross'),
-        alt.Color('distributor', title='Distributor', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
+        alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Accumulation Gross Movements',
         height=500
@@ -524,7 +524,7 @@ if nav_button_7:
             st.image('disney_logo.png', use_column_width=True, caption='Logo Disney')
 
         st.markdown("""
-            <p style='text-align: justify;'>20th Century Fox (sekarang adalah 20th Century Studio) dulunya adalah salah satu perusahaan distributor studio perfilman, sebelum akhirnya diakuisisi oleh The Walt Disney Studio untuk menjadi bagian dari anak perusahaannya. Akuisisi tersebut terjadi pada tahun 2019 yang lalu yang di mana The Walt Disney Studio (salah satu divisi dari The Walt Disney Company) itu sendiri membeli sebagian besar aset perusahaan branding Fox dan mengganti semua nama studio yang berelasi dengannya. Kejadian akuisisi tersebut dapat terlihat dari <b>pergerakan saham 20th Century Fox yang di mana tahun 2019 menjadi perhentian terakhirnya</b>. Walaupun demikian, aset fox yang masih tersisa hingga saat ini adalah Fox Corp yang merupakan tayangan berita dan olahraga, dengan jaringan Fox Sports, Fox News, dan Fox TV.</p>
+            <p style='text-align: justify;'>20th Century Fox (sekarang adalah 20th Century Studio) dulunya adalah salah satu studio perfilman, sebelum akhirnya diakuisisi oleh The Walt Disney Studio untuk menjadi bagian dari anak perusahaannya. Akuisisi tersebut terjadi pada tahun 2019 yang lalu yang di mana The Walt Disney Studio (salah satu divisi dari The Walt Disney Company) itu sendiri membeli sebagian besar aset perusahaan branding Fox dan mengganti semua nama studio yang berelasi dengannya. Kejadian akuisisi tersebut dapat terlihat dari <b>pergerakan saham 20th Century Fox yang di mana tahun 2019 menjadi perhentian terakhirnya</b>. Walaupun demikian, aset fox yang masih tersisa hingga saat ini adalah Fox Corp yang merupakan tayangan berita dan olahraga, dengan jaringan Fox Sports, Fox News, dan Fox TV.</p>
         """, unsafe_allow_html=True)
 
     with col2:
