@@ -12,16 +12,14 @@ import altair as alt
 
 st.set_page_config(
     page_title = "Arima Yuuto UK Box Office", 
-    layout = "wide"
+    layout = "wide",
+    theme="light"
     )
 
 # Styling the page
 st.markdown(
     """
     <style>
-     body {
-        background-color: white;
-    }
     .stButton button {
         width: 100%;
         margin-top: 0;
