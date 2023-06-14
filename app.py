@@ -19,6 +19,13 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    :root {
+        --primary-color: #F63366;
+        --background-color: #FFFFFF;
+        --secondary-background-color: #F0F2F6;
+        --text-color: #262730;
+        --font: sans-serif;
+    }
     .stButton button {
         width: 100%;
         margin-top: 0;
