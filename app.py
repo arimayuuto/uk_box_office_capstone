@@ -19,6 +19,9 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+     body {
+        background-color: white;
+    }
     .stButton button {
         width: 100%;
         margin-top: 0;
