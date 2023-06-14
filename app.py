@@ -256,8 +256,8 @@ if nav_button_1:
         ).configure_title(
             anchor='middle'
         ).configure_axis(
-            labelColor='white',  # Warna tulisan pada sumbu x dan sumbu y
-            titleColor='white'  # Warna judul sumbu x dan sumbu y
+            labelColor='black',  # Warna tulisan pada sumbu x dan sumbu y
+            titleColor='black'  # Warna judul sumbu x dan sumbu y
         )
 
         st.altair_chart(chart)
