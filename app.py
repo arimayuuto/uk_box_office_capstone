@@ -604,8 +604,8 @@ if nav_button_7:
         ).configure_title(
             anchor='middle'
         ).configure_axis(
-            labelColor='white',
-            titleColor='white'
+            labelColor='black',
+            titleColor='black'
         )
 
         st.altair_chart(chart)
