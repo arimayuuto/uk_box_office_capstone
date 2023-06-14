@@ -15,8 +15,6 @@ st.set_page_config(
     layout = "wide"
     )
 
-st.set_theme('light')
-
 # Styling the page
 st.markdown(
     """
