@@ -12,9 +12,7 @@ import altair as alt
 
 st.set_page_config(
     page_title="Arima Yuuto UK Box Office", 
-    layout="wide", 
-    initial_sidebar_state="auto", 
-    theme="light"
+    layout="wide"
 )
 
 # Styling the page
