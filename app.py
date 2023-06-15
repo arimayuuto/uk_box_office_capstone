@@ -46,6 +46,7 @@ shares_2011_now = market_shares.loc[market_shares['year'] > '2010-01-01']
 ### Total market shares 2011-now (market_shares_2011_now)
 total_market_shares = market_shares.groupby([market_shares.year.dt.year]).agg({'marketShare': 'sum'}).reset_index()
 market_shares_2011_now = total_market_shares.loc[total_market_shares['year'] > 2010]
+market_shares_2011_now['year'] = pd.to_datetime(market_shares_2011_now["year"], format='%Y')
 ### Five highest average shares of distributors (five_averages_shares)
 five_averages_shares = shares_2011_now.groupby('distributor').mean('marketShare').sort_values('marketShare', ascending=False).reset_index().head(5)
 five_averages_shares = five_averages_shares[['distributor','marketShare']]
@@ -101,6 +102,7 @@ re_showing_film = film_showing_status.loc[film_showing_status['status'] == 'Re-S
 re_showing_film = re_showing_film[['year','film','distributor_x']]
 
 count_films_of_five_2011_now = films_five_highest_share.groupby([films_five_highest_share.year, films_five_highest_share.distributor]).agg(film_count= ('film' , 'count')).reset_index()
+count_films_of_five_2011_now['year'] = pd.to_datetime(count_films_of_five_2011_now["year"], format='%Y')
 
 pivot_count_films_of_five_2011_now = count_films_of_five_2011_now.pivot_table('film_count', ['year'], 'distributor').reset_index()
 pivot_count_films_of_five_2011_now = pivot_count_films_of_five_2011_now[pivot_columns]
@@ -229,6 +231,7 @@ if nav_button_1:
     # Tampilkan chart pada kolom pertama
     with col1:
         source = films_five_highest_share.groupby(films_five_highest_share.year).agg(total_gross=('total_gross', 'sum')).reset_index()
+        source['year'] = pd.to_datetime(source["year"], format='%Y')
 
         chart = alt.Chart(source).mark_line(point=True).encode(
             alt.X('year', title='Year'),
@@ -243,24 +246,49 @@ if nav_button_1:
 
     with col2:
         overall_film_showing_status = film_showing_status.loc[(film_showing_status['year'] - film_showing_status['first_launch_year']) != 1].reset_index().drop(columns=['index'])
-        # overall_film_showing_status
 
-        chart = alt.Chart(overall_film_showing_status).mark_bar().encode(
-            x=alt.X('count(status):Q', title='Count'),
-            y=alt.Y('status:O', title=''),
-            color=alt.Color('status:N', legend=None),
-            row=alt.Row('distributor_x:N', title='', sort=five_averages_distributors)
-        ).properties(
-            title='Film Showing Status Counts',
-            height=58
-        ).configure_title(
-            anchor='middle'
-        ).configure_axis(
-            labelColor='black',  # Warna tulisan pada sumbu x dan sumbu y
-            titleColor='black'  # Warna judul sumbu x dan sumbu y
-        )
+        all_years, since_pandemic = st.tabs(["All Years", "Since Pandemic"])
 
-        st.altair_chart(chart)
+        with all_years:
+
+            chart = alt.Chart(overall_film_showing_status).mark_bar().encode(
+                x=alt.X('count(status):Q', title='Count'),
+                y=alt.Y('status:O', title=''),
+                color=alt.Color('status:N', legend=None),
+                row=alt.Row('distributor_x:N', title='', sort=five_averages_distributors)
+            ).properties(
+                title='Film Showing Status Counts',
+                height=58
+            ).configure_title(
+                anchor='middle'
+            ).configure_axis(
+                labelColor='black',  # Warna tulisan pada sumbu x dan sumbu y
+                titleColor='black'  # Warna judul sumbu x dan sumbu y
+            )
+
+            st.altair_chart(chart)
+
+        with since_pandemic:
+
+            pandemic_film_showing_status = overall_film_showing_status.loc[overall_film_showing_status['year'] > 2019].reset_index().drop(columns=['index'])
+            pandemic_film_showing_status = pandemic_film_showing_status.groupby([pandemic_film_showing_status['distributor_x'], pandemic_film_showing_status['year'], pandemic_film_showing_status['status']]).agg(film_count = ('status','count')).reset_index()
+
+            chart = alt.Chart(pandemic_film_showing_status).mark_bar().encode(
+                x=alt.X('sum(film_count):Q', title='Jumlah Film'),
+                y=alt.Y('status:O', title=''),
+                color=alt.Color('status:N', legend=None),
+                row=alt.Row('distributor_x:N', title='', sort=five_averages_distributors)
+            ).properties(
+                title='Film Showing Status Counts (Since Pandemic)',
+                height=58
+            ).configure_title(
+                anchor='middle'
+            ).configure_axis(
+                labelColor='black',
+                titleColor='black'
+            )
+
+            st.altair_chart(chart)
     
 
 if nav_button_2:
@@ -431,11 +459,12 @@ if nav_button_5:
         alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Films Count Movements',
-        height=500
+        height=500,
+        width=1100
     ).configure_title(
         anchor='middle'
     )
-    st.altair_chart(line_chart,use_container_width=True)
+    st.altair_chart(line_chart)
     # Chart per distributor
     five_averages_distributors_modif = st.tabs([five_averages_distributors[0], five_averages_distributors[1], five_averages_distributors[2], five_averages_distributors[3], five_averages_distributors[4]])
 
@@ -444,8 +473,10 @@ if nav_button_5:
             films_line = alt.Chart(pivot_count_films_of_five_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Films Count')
+            ).properties(
+                width=950
             )
-            st.altair_chart(films_line,use_container_width=True)
+            st.altair_chart(films_line)
 
             st.dataframe(films_five_highest_share[['year', 'film']].loc[films_five_highest_share['distributor'] == five_averages_distributors[i]].reset_index().drop(columns=['index']), use_container_width=True)
 
@@ -464,11 +495,12 @@ if nav_button_6:
         alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Distributor Average Shares Movements',
-        height=500
+        height=500,
+        width=1100
     ).configure_title(
         anchor='middle'
     )
-    st.altair_chart(line_chart,use_container_width=True)
+    st.altair_chart(line_chart)
     ## Chart per distributor
     five_averages_distributors_modif = st.tabs([five_averages_distributors[0], five_averages_distributors[1], five_averages_distributors[2], five_averages_distributors[3], five_averages_distributors[4]])
 
@@ -477,8 +509,10 @@ if nav_button_6:
             highest_earns_line = alt.Chart(pivot_highest_gross_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Highest Gross')
+            ).properties(
+                width=950
             )
-            st.altair_chart(highest_earns_line,use_container_width=True)
+            st.altair_chart(highest_earns_line)
 
     # Accumulation Gross
     st.subheader("Accumulation Gross of Five Studios")
@@ -490,11 +524,12 @@ if nav_button_6:
         alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Accumulation Gross Movements',
-        height=500
+        height=500,
+        width=1100
     ).configure_title(
         anchor='middle'
     )
-    st.altair_chart(line_chart,use_container_width=True)
+    st.altair_chart(line_chart)
     ## Chart per distributor
     five_averages_distributors_modif = st.tabs([five_averages_distributors[0], five_averages_distributors[1], five_averages_distributors[2], five_averages_distributors[3], five_averages_distributors[4]])
 
@@ -503,8 +538,10 @@ if nav_button_6:
             total_earns_line = alt.Chart(pivot_accumulation_gross_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Accumulation Gross')
+            ).properties(
+                width=950
             )
-            st.altair_chart(total_earns_line,use_container_width=True)
+            st.altair_chart(total_earns_line)
 
 if nav_button_7:
     st.title("Kemunduran 20th Century Fox dari Dunia Bioskop")
