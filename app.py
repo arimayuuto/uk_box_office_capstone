@@ -201,7 +201,7 @@ if nav_button_1:
 
         st.metric(
             label = "Shares",
-            value = f"{curr_shares:.0f} (£)", 
+            value = f"{curr_shares:.0f}", 
             delta = f"{shares_diff_pct:.2f}%"
         )
 
@@ -235,7 +235,7 @@ if nav_button_1:
 
         chart = alt.Chart(source).mark_line(point=True).encode(
             alt.X('year', title='Year'),
-            alt.Y('total_gross', title='Gross Earn (£)')
+            alt.Y('total_gross', title='Gross Earn')
         ).properties(
             title='Total Gross Earn',
             height=500
@@ -362,7 +362,7 @@ if nav_button_3:
 
                 st.metric(
                     label = "Shares",
-                    value = f"{curr_shares:.0f} (£)", 
+                    value = f"{curr_shares:.0f}", 
                     delta = f"{shares_diff_pct:.2f}%"
                 )
 
@@ -377,7 +377,7 @@ if nav_button_3:
 
                 st.metric(
                     label = "Earns",
-                    value = f"{curr_earns:.0f} (£)", 
+                    value = f"{curr_earns:.0f}", 
                     delta = f"{earns_diff_pct:.2f}%"
                 )
 
@@ -417,7 +417,7 @@ if nav_button_4:
     st.markdown("<br>", unsafe_allow_html=True)
     total_shares = alt.Chart(market_shares_2011_now).mark_line(point=True).encode(
     alt.X('year', title='Year'),
-    alt.Y('marketShare', title='Total Share (£)')
+    alt.Y('marketShare', title='Total Share')
     ).properties(
         # title='Total Shares Movements',
         height=500,
@@ -437,7 +437,7 @@ if nav_button_4:
     st.subheader("Five Highest Average Studio Shares")
     st.markdown("<br>", unsafe_allow_html=True)
     rank_chart = alt.Chart(data).mark_bar().encode(
-        x='Average Shares (£)',
+        x='Nilai Saham (£)',
         y=alt.Y('Studio', sort='-x')
     ).configure_axis(
             labelColor='black',  # Warna tulisan pada sumbu x dan sumbu y
@@ -449,7 +449,7 @@ if nav_button_4:
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(shares_of_five_biggest_avg).mark_line(point=True).encode(
         alt.X('year', title='Year'),
-        alt.Y('marketShare', title='Market Shares (£)'),
+        alt.Y('marketShare', title='Market Shares'),
         alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Distributor Average Shares Movements',
@@ -473,7 +473,7 @@ if nav_button_4:
         with five_averages_distributors_modif[i]:
             shares_line = alt.Chart(pivot_five_avg_biggest).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
-                alt.Y(five_averages_distributors[i], title='Market Share (£)')
+                alt.Y(five_averages_distributors[i], title='Market Share')
             ).properties(
                 width=950
             ).configure_axis(
@@ -538,7 +538,7 @@ if nav_button_6:
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(highest_gross_2011_now).mark_line(point=True).encode(
         alt.X('year', title='Year'),
-        alt.Y('highest_gross', title='Highest Gross (£)'),
+        alt.Y('highest_gross', title='Highest Gross'),
         alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Distributor Average Shares Movements',
@@ -561,7 +561,7 @@ if nav_button_6:
         with five_averages_distributors_modif[i]:
             highest_earns_line = alt.Chart(pivot_highest_gross_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
-                alt.Y(five_averages_distributors[i], title='Highest Gross (£)')
+                alt.Y(five_averages_distributors[i], title='Highest Gross')
             ).properties(
                 width=950
             ).configure_axis(
@@ -576,7 +576,7 @@ if nav_button_6:
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(accumulation_gross_2011_now).mark_line(point=True).encode(
         alt.X('year', title='Year'),
-        alt.Y('accumulation_gross', title='Accumulation Gross (£)'),
+        alt.Y('accumulation_gross', title='Accumulation Gross'),
         alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Accumulation Gross Movements',
@@ -599,7 +599,7 @@ if nav_button_6:
         with five_averages_distributors_modif[i]:
             total_earns_line = alt.Chart(pivot_accumulation_gross_2011_now).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
-                alt.Y(five_averages_distributors[i], title='Accumulation Gross (£)')
+                alt.Y(five_averages_distributors[i], title='Accumulation Gross')
             ).properties(
                 width=950
             ).configure_axis(
