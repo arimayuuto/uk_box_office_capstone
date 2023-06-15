@@ -241,6 +241,9 @@ if nav_button_1:
             height=500
         ).configure_title(
             anchor='middle'
+        ).configure_axis(
+            labelColor='black',  # Warna tulisan pada sumbu x dan sumbu y
+            titleColor='black'  # Warna judul sumbu x dan sumbu y
         )
         st.altair_chart(chart, use_container_width=True)
 
@@ -421,6 +424,9 @@ if nav_button_4:
         width=950
     ).configure_title(
         anchor='middle'
+    ).configure_axis(
+            labelColor='black',  # Warna tulisan pada sumbu x dan sumbu y
+            titleColor='black'  # Warna judul sumbu x dan sumbu y
     )
     st.altair_chart(total_shares)
 
@@ -433,6 +439,9 @@ if nav_button_4:
     rank_chart = alt.Chart(data).mark_bar().encode(
         x='Nilai Saham (£)',
         y=alt.Y('Studio', sort='-x')
+    ).configure_axis(
+            labelColor='black',  # Warna tulisan pada sumbu x dan sumbu y
+            titleColor='black'  # Warna judul sumbu x dan sumbu y
     )
     st.altair_chart(rank_chart, use_container_width=True)
 
@@ -448,6 +457,12 @@ if nav_button_4:
         width=1100
     ).configure_title(
         anchor='middle'
+    ).configure_legend(
+        labelColor='black',
+        titleColor='black'
+    ).configure_axis(
+        labelColor='black',
+        titleColor='black'
     )
     st.altair_chart(line_chart)
 
@@ -461,6 +476,9 @@ if nav_button_4:
                 alt.Y(five_averages_distributors[i], title='Market Share')
             ).properties(
                 width=950
+            ).configure_axis(
+                labelColor='black',
+                titleColor='black'
             )
             st.altair_chart(shares_line)
 
@@ -482,8 +500,15 @@ if nav_button_5:
         width=1100
     ).configure_title(
         anchor='middle'
+    ).configure_legend(
+        labelColor='black',
+        titleColor='black'
+    ).configure_axis(
+        labelColor='black',
+        titleColor='black'
     )
     st.altair_chart(line_chart)
+
     # Chart per distributor
     five_averages_distributors_modif = st.tabs([five_averages_distributors[0], five_averages_distributors[1], five_averages_distributors[2], five_averages_distributors[3], five_averages_distributors[4]])
 
@@ -494,6 +519,9 @@ if nav_button_5:
                 alt.Y(five_averages_distributors[i], title='Films Count')
             ).properties(
                 width=950
+            ).configure_axis(
+                labelColor='black',
+                titleColor='black'
             )
             st.altair_chart(films_line)
 
@@ -518,6 +546,12 @@ if nav_button_6:
         width=1100
     ).configure_title(
         anchor='middle'
+    ).configure_legend(
+        labelColor='black',
+        titleColor='black'
+    ).configure_axis(
+        labelColor='black',
+        titleColor='black'
     )
     st.altair_chart(line_chart)
     ## Chart per distributor
@@ -530,6 +564,9 @@ if nav_button_6:
                 alt.Y(five_averages_distributors[i], title='Highest Gross')
             ).properties(
                 width=950
+            ).configure_axis(
+                labelColor='black',
+                titleColor='black'
             )
             st.altair_chart(highest_earns_line)
 
@@ -547,6 +584,12 @@ if nav_button_6:
         width=1100
     ).configure_title(
         anchor='middle'
+    ).configure_legend(
+        labelColor='black',
+        titleColor='black'
+    ).configure_axis(
+        labelColor='black',
+        titleColor='black'
     )
     st.altair_chart(line_chart)
     ## Chart per distributor
@@ -559,6 +602,9 @@ if nav_button_6:
                 alt.Y(five_averages_distributors[i], title='Accumulation Gross')
             ).properties(
                 width=950
+            ).configure_axis(
+                labelColor='black',
+                titleColor='black'
             )
             st.altair_chart(total_earns_line)
 
@@ -591,6 +637,9 @@ if nav_button_7:
             title='Pergerakan Nilai Saham 20th Century Fox'
         ).configure_title(
             anchor='middle'
+        ).configure_axis(
+            labelColor='black',
+            titleColor='black'
         )
         st.altair_chart(shares_line,use_container_width=True)
 
@@ -609,6 +658,9 @@ if nav_button_7:
             title="Rank Rata-Rata Nilai Saham Per-tahun"
         ).configure_title(
             anchor='middle'
+        ).configure_axis(
+            labelColor='black',
+            titleColor='black'
         )
 
         # Menampilkan chart menggunakan Streamlit
@@ -634,6 +686,12 @@ if nav_button_7:
             height=500
         ).configure_title(
             anchor='middle'
+        ).configure_legend(
+            labelColor='black',
+            titleColor='black'
+        ).configure_axis(
+            labelColor='black',
+            titleColor='black'
         )
         st.altair_chart(line_chart,use_container_width=True)
 
@@ -648,6 +706,12 @@ if nav_button_7:
             height=500
         ).configure_title(
             anchor='middle'
+        ).configure_legend(
+            labelColor='black',
+            titleColor='black'
+        ).configure_axis(
+            labelColor='black',
+            titleColor='black'
         )
         st.altair_chart(line_chart,use_container_width=True)
 
