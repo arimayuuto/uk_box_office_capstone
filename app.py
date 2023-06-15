@@ -411,6 +411,7 @@ if nav_button_4:
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.subheader("Total Shares Movements")
+    st.markdown("<br>", unsafe_allow_html=True)
     total_shares = alt.Chart(market_shares_2011_now).mark_line(point=True).encode(
     alt.X('year', title='Year'),
     alt.Y('marketShare', title='Total Share')
@@ -423,8 +424,19 @@ if nav_button_4:
     )
     st.altair_chart(total_shares)
 
+    five_averages_shares = five_averages_shares.rename(columns={'distributor': 'Studio', 'marketShare': 'Nilai Saham (£)'})
+
+    data = pd.DataFrame(five_averages_shares)
+
+    st.subheader("Five Highest Average Studio Shares")
+    st.markdown("<br>", unsafe_allow_html=True)
+    rank_chart = alt.Chart(data).mark_bar().encode(
+        x='Nilai Saham (£)',
+        y=alt.Y('Studio', sort='-x')
+    )
+    st.altair_chart(rank_chart, use_container_width=True)
+
     st.subheader("Shares Movement of Five Studio")
-    # Five distributors in a chart
     st.markdown("<br>", unsafe_allow_html=True)
     line_chart = alt.Chart(shares_of_five_biggest_avg).mark_line(point=True).encode(
         alt.X('year', title='Year'),
@@ -584,10 +596,26 @@ if nav_button_7:
 
         five_averages_shares = five_averages_shares.rename(columns={'distributor': 'Studio', 'marketShare': 'Nilai Saham (£)'})
         pivot_five_averages_shares = five_averages_shares.pivot_table(columns='Studio', values='Nilai Saham (£)').reset_index().drop(columns=['index'])
-        pivot_five_averages_shares[pivot_distributors_columns]
+        # pivot_five_averages_shares[pivot_distributors_columns]
+
+        # Data contoh
+        data = pd.DataFrame(five_averages_shares)
+
+        # Membuat rank chart menggunakan Altair
+        rank_chart = alt.Chart(data).mark_bar().encode(
+            x='Nilai Saham (£)',
+            y=alt.Y('Studio', sort='-x')
+        ).properties(
+            title="Rank Rata-Rata Nilai Saham Per-tahun"
+        ).configure_title(
+            anchor='middle'
+        )
+
+        # Menampilkan chart menggunakan Streamlit
+        st.altair_chart(rank_chart, use_container_width=True)
 
     st.markdown("""
-        <p style='text-align: justify;'>Dari data yang diperoleh dari <em>Box Office Inggris</em> (boxofficedata.co.uk) dengan periode 2011-sekarang, diseleksi lima perusahaan yang memiliki nilai rata-rata pergerakan saham terbesar setiap tahunnya. 20th Century Fox dan The Walt Disney Company adalah dua perusahaan dengan peringkat teratas yang memiliki nilai rata-rata pergerakan saham (tabel sebelah kanan).</p>
+        <p style='text-align: justify;'>Dari data yang diperoleh dari <em>Box Office Inggris</em> (boxofficedata.co.uk) dengan periode 2011-sekarang, diseleksi lima perusahaan yang memiliki nilai rata-rata pergerakan saham terbesar setiap tahunnya. 20th Century Fox dan The Walt Disney Company adalah dua perusahaan dengan peringkat teratas yang memiliki nilai rata-rata pergerakan saham (rank chart di atasnya).</p>
     """, unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
