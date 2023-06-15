@@ -62,7 +62,7 @@ pivot_columns = np.append (['year'], pivot_distributors_columns)
 ### Pivot table of five highest average (pivot_five_avg_biggest)
 pivot_five_avg_biggest = shares_of_five_biggest_avg.pivot_table('marketShare', ['year'], 'distributor').reset_index()
 pivot_five_avg_biggest = pivot_five_avg_biggest[pivot_columns]
-pivot_five_avg_biggest = pivot_five_avg_biggest.fillna(0)
+# pivot_five_avg_biggest = pivot_five_avg_biggest.fillna(0)
 
 ## 2. Films Table (films)
 films = pd.read_csv("datasets/archive_export.csv")
@@ -294,7 +294,7 @@ if nav_button_1:
 if nav_button_2:
     st.title("Tables")
 
-    shares, movies = st.tabs(["Shares", "Movies"])
+    shares, movies = st.tabs(["Shares", "Films"])
 
     with shares:
 
@@ -346,6 +346,9 @@ if nav_button_3:
             mx_shares, mx_earns, mx_new_film_count = st.columns(3)
 
             with mx_shares:
+
+                pivot_five_avg_biggest = pivot_five_avg_biggest.fillna(0)
+
                 curr_shares = pivot_five_avg_biggest[five_averages_distributors[i]].iloc[-1]
                 prev_shares = pivot_five_avg_biggest[five_averages_distributors[i]].iloc[-2]
 
@@ -413,11 +416,12 @@ if nav_button_4:
     alt.Y('marketShare', title='Total Share')
     ).properties(
         # title='Total Shares Movements',
-        height=500
+        height=500,
+        width=950
     ).configure_title(
         anchor='middle'
     )
-    st.altair_chart(total_shares,use_container_width=True)
+    st.altair_chart(total_shares)
 
     st.subheader("Shares Movement of Five Studio")
     # Five distributors in a chart
@@ -428,11 +432,12 @@ if nav_button_4:
         alt.Color('distributor', title='Studio', scale=alt.Scale(scheme='category10'), sort=five_averages_distributors)
     ).properties(
         # title='Distributor Average Shares Movements',
-        height=500
+        height=500,
+        width=1100
     ).configure_title(
         anchor='middle'
     )
-    st.altair_chart(line_chart,use_container_width=True)
+    st.altair_chart(line_chart)
 
     # Chart per distributor
     five_averages_distributors_modif = st.tabs([five_averages_distributors[0], five_averages_distributors[1], five_averages_distributors[2], five_averages_distributors[3], five_averages_distributors[4]])
@@ -442,8 +447,10 @@ if nav_button_4:
             shares_line = alt.Chart(pivot_five_avg_biggest).mark_line(point=True).encode(
                 alt.X('year', title='Year'),
                 alt.Y(five_averages_distributors[i], title='Market Share')
+            ).properties(
+                width=950
             )
-            st.altair_chart(shares_line,use_container_width=True)
+            st.altair_chart(shares_line)
 
 if nav_button_5:
 
