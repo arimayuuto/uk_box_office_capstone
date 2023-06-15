@@ -167,7 +167,7 @@ nav_button_3 = st.sidebar.button("Studios")
 nav_button_4 = st.sidebar.button("Market Shares")
 nav_button_5 = st.sidebar.button("Films")
 nav_button_6 = st.sidebar.button("Gross Earns")
-nav_button_7 = st.sidebar.button("Analysis Creation")
+nav_button_7 = st.sidebar.button("Story Discover")
 nav_button_8 = st.sidebar.button("Source")
 nav_button_9 = st.sidebar.button("About")
 
